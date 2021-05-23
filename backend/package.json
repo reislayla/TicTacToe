@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "tic tac toe",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Bruno Matos & Layla Andrade",
+  "license": "ISC"
+}
