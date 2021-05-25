@@ -1,74 +1,142 @@
 import React, {Component} from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { Menu } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 import 'antd/dist/antd.css';
-import { UserOutlined, AppstoreOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
-const { SubMenu } = Menu;
-
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-
+import axios from 'axios';
+import logo from '../assets/images/logo.png';
+import { Row, Col } from 'antd';
+import {Link} from "react-router-dom";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email:'',
+      password: ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    axios.post('http://localhost:3000/api/login', user)
+      .then(res => {
+        if (res.status === 200) {
+          this.props.history.push('/app');
+        } else {
+          throw new Error(res.error);
+        }
+      })
+      .catch( err => {
+        console.log("Error: ", err);
+      })
+  }
+
 
   render() {
     return (
       <div>
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{
-            remember: true,
-          }}
-        >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your username!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+        <Row style={{display:'flex', justifyContent:'space-around', alignItems:'center', minHeight:'75vh'}}>
+          <Col span={12} >
+            <div>
+              <div>
+                <img src={logo} alt="Logo" style={{marginTop:'50px', width:'300px'}}/>
+                <p>not registered yet?</p>
+                <p>really? >:(</p>
+                <p>register here:</p>
+              </div>
+              <Link to="/register">
+                <Button className='background-unset register-button' htmlType="submit"
+                        style={{
+                          border:'none',
+                          background: "#FF1659",
+                          color:'white',
+                          width: '300px',
+                          height: '50px',
+                          marginBottom: '50px'
+                        }}>
+                  REGISTER!
+                </Button>
+              </Link>
+            </div>
+          </Col>
+          <Col span={12}>
+            <Card title="START" bordered={false}
+                  style={{
+                    width: 450,
+                    backgroundColor: '#FF1659'
+                  }}
+                  bodyStyle={{
+                    backgroundColor: '#7586a0',
+                    display:'flex',
+                    justifyContent:'center'
+                  }}
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+            >
+              <div style={{backgroundColor: '#7586a0', marginTop:'25px', width:'300px'}}>
+                <Form
+                  name="basic"
+                  initialValues={{
+                    remember: true,
+                  }}
+                >
+                  <Form.Item
+                    label={<label style={{ color: "white" }}>EMAIL</label>}
+                    labelCol={{span:24}}
+                    wrapperCol={{span:24}}
+                    name="email"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your email!',
+                      },
+                    ]}
+                  >
+                    <Input style={{ height:'50px'}} />
+                  </Form.Item>
 
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
+                  <Form.Item
+                    label={<label style={{ color: "white" }}>PASSWORD</label>}
+                    labelCol={{span:24}}
+                    wrapperCol={{span:24}}
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your password!',
+                      },
+                    ]}
+                  >
+                    <Input.Password style={{ height:'50px'}}/>
+                  </Form.Item>
+                  <Form.Item >
+                    <Button className='background-unset' type='primary' htmlType="submit"
+                            style={{
+                              border:'none',
+                              background: "#e6ff00",
+                              color:'black',
+                              width: '300px',
+                              height: '50px',
+                              marginTop:'25px',
+                              marginBottom:'25px'
+                            }}>
+                      LOGIN!
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </div>
+            </Card>
+          </Col>
+        </Row>
       </div>
     )
   }
