@@ -1,5 +1,8 @@
+@import url(//db.onlinewebfonts.com/c/1db29588408eadbd4406aae9238555eb?family=Consolas);
+
 body{
   background-color: #002050;
+  font-family: Consolas,monaco,monospace; 
 }
 
 .App {
