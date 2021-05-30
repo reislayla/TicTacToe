@@ -6,7 +6,7 @@ import axios from 'axios';
 import logo from '../assets/images/logo.png';
 import { Row, Col } from 'antd';
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,14 +27,19 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.password === this.state.confirmPassword) {
+
       const user = {
-        user: this.state.username,
+        username: this.state.username,
         email: this.state.email,
         password: this.state.password
       };
-      axios.post('http://localhost:3000/api/register', user)
+
+      console.log(user)
+
+      axios.post('http://localhost:3000/register', user)
         .then(res => {
-          if (res.status === 200) {
+          console.log(res)
+          if (res.data.code === 200) {
             this.props.history.push('/');
           } else {
             throw new Error(res.error);
@@ -61,8 +66,9 @@ class Login extends Component {
                 <p>really? >:(</p>
                 <p>login here:</p>
               </div>
-                <Link to="/">
+                <Link to="/login">
                   <Button className='background-unset register-button' htmlType="submit"
+                          onClick={this.handleSubmit}
                           style={{
                             border:'none',
                             background: "#e6ff00",
@@ -131,7 +137,7 @@ class Login extends Component {
                            type="email"
                            name="email"
                            value={this.state.email}
-                           onChange={this.handleChange}v/>
+                           onChange={this.handleChange}/>
                   </Form.Item>
 
 
@@ -198,4 +204,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

@@ -22,6 +22,7 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
+
     e.preventDefault();
     const user = {
       email: this.state.email,
@@ -120,6 +121,7 @@ class Login extends Component {
                   </Form.Item>
                   <Form.Item >
                     <Button className='background-unset' type='primary' htmlType="submit"
+                            onClick={this.handleSubmit}
                             style={{
                               border:'none',
                               background: "#e6ff00",
