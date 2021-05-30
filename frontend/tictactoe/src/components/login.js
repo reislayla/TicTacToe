@@ -29,9 +29,11 @@ class Login extends Component {
       password: this.state.password
     };
 
-    axios.post('http://localhost:3000/api/login', user)
+    console.log(user)
+
+    axios.post('http://localhost:3000/login', user)
       .then(res => {
-        if (res.status === 200) {
+        if (res.data.code === 200) {
           this.props.history.push('/app');
         } else {
           throw new Error(res.error);
@@ -102,7 +104,11 @@ class Login extends Component {
                       },
                     ]}
                   >
-                    <Input style={{ height:'50px'}} />
+                    <Input
+                      name="email"
+                      value={this.state.email}
+                      style={{ height:'50px'}}
+                      onChange={this.handleChange}/>
                   </Form.Item>
 
                   <Form.Item
@@ -117,7 +123,11 @@ class Login extends Component {
                       },
                     ]}
                   >
-                    <Input.Password style={{ height:'50px'}}/>
+                    <Input.Password
+                      name="password"
+                      value={this.state.password}
+                      style={{ height:'50px'}}
+                      onChange={this.handleChange}/>
                   </Form.Item>
                   <Form.Item >
                     <Button className='background-unset' type='primary' htmlType="submit"

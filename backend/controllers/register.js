@@ -2,7 +2,7 @@ const db = require('../config/conn')
 
 exports.post = (req, res) => {
 
-    var user = {
+    const user = {
         "username": req.body.username,
         "email": req.body.email,
         "password": req.body.password
