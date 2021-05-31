@@ -4,6 +4,9 @@ import Login from './components/login';
 import Register from './components/register';
 import Application from './components/application';
 import './styles/App.css';
+import HomePage from "../src/pages/home/home.page";
+import RoomPage from "../src/pages/room/room.page";
+import GamePage from "../src/pages/game/game.page";
 
 function App() {
   return (
@@ -12,7 +15,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/app" component={Application} />
+          <Route exact path="/home" component={HomePage} />
+          <Route exact path="/room" component={RoomPage} />
+          <Route exact path="/game" component={GamePage} />
         </Switch>
       </BrowserRouter>
     </div>

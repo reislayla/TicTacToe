@@ -34,7 +34,7 @@ class Login extends Component {
     axios.post('http://localhost:3000/login', user)
       .then(res => {
         if (res.data.code === 200) {
-          this.props.history.push('/app');
+          this.props.history.push('/home');
         } else {
           throw new Error(res.error);
         }
