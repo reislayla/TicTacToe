@@ -30,6 +30,7 @@ exports.post = (req, res) => {
                     status:400,
                     message: "Please enter valid information."
                 });
+                console.log("Error:", error)
             }
         }
     });
