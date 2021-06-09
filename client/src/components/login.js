@@ -31,7 +31,7 @@ class Login extends Component {
 
     console.log(user)
 
-    axios.post('http://localhost:3000/login', user)
+    axios.post('https://tictactoe-lb-web.herokuapp.com/login', user)
       .then(res => {
         if (res.data.code === 200) {
           this.props.history.push('/home');

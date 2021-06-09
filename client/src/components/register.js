@@ -36,7 +36,7 @@ class Register extends Component {
 
       console.log(user)
 
-      axios.post('http://localhost:3000/register', user)
+      axios.post('https://tictactoe-lb-web.herokuapp.com/register', user)
         .then(res => {
           console.log(res)
           if (res.data.code === 200) {
